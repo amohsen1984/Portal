@@ -1,0 +1,233 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eztato</title>
+    <script src="https://use.typekit.net/hiv0gsm.js"></script>
+    <script>try{Typekit.load({ async: true });}catch(e){}</script>
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+<header class="app-header">
+    <div class="row">
+        <div class="column medium-3 logo-container">
+            <img src="img/logo.png" alt="">
+        </div>
+        <div class="column medium-4 menu-container">
+            <ul class="vertical medium-horizontal menu align-right">
+                <li><a href=""><img src="img/icon-profile.png" alt="Your Profile"></a></li>
+                <li><a href=""><img src="img/invite-seller.png" alt="Invite Seller"></a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+<div class="app-body">
+    
+        <div class="row column">
+            <article class="property">
+               <div class="card-header">
+                   <div class="property-name">Apartment 7, 11 Morledge Street, Leicester, LE1 1TH</div>
+               </div>
+                <section class="card-body">
+                   <div class="property-meta">
+                       <b>Characteristics:</b>
+                       <div>
+                           <label for="type">Type: </label> 
+                           <select name="type" id="type"  disabled="disabled">
+                               <option>Apartment</option>
+                               <option>Terrace</option>
+                               <option>Semi-detached</option>
+                               <option>Detached</option>
+                           </select>
+                       </div>
+                       <div>
+                           <label for="price">Asking Price:</label>
+                            <input type="text" value="180,000" disabled="disabled">
+                       </div>
+                       <div>
+                           <label for="floors">Floors:</label>
+                           <input id="floors" type="number" value="1" disabled="disabled">
+                       </div>
+                       <div>
+                           <label for="bedrooms">Bedrooms:</label>
+                           <input id="bedrooms" type="number" value="2" disabled="disabled">
+                       </div>
+                       <div>
+                           <label for="bathrooms">Bathrooms:</label>
+                           <input id="bathrooms" type="number" value="2"  disabled="disabled">
+                       </div>
+                       <div>
+                            <label for="reception">Reception Rooms:</label>
+                            <input id="reception" type="number" value="1"  disabled="disabled">
+                       </div>
+                       <div>
+                            <label for="new">New Build:</label>
+                            <select name="new" id="new" disabled="disabled">
+                               <option>Yes</option>
+                               <option>No</option>
+                           </select>
+                       </div>
+                       <div>
+                            <label for="chain">Part of Chain:</label>
+                            <select name="chain" id="chain" disabled="disabled">
+                               <option>Yes</option>
+                               <option>No</option>
+                           </select>
+                       </div>
+                   </div>
+                   <div class="property-description">
+                       <b>Description:</b>
+                       <div class="property-description-editor">
+                           <textarea name="description" id="" cols="30" rows="10" disabled="disabled">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium exercitationem, assumenda provident distinctio. Animi harum repellat doloribus, maiores! Et id, praesentium rerum numquam esse enim. Quasi ex recusandae quod? Aliquam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit nihil et, eaque rem dolorum, culpa repudiandae repellendus provident aperiam, tempore error. Doloremque quaerat, deserunt a eos placeat tempora, ad numquam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam assumenda totam molestias, veniam, nam ipsum hic, corporis quis adipisci nihil saepe maiores? Voluptatem ea explicabo inventore exercitationem odio, recusandae quaerat. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste facilis molestias neque quaerat dolores illum, dignissimos doloremque possimus amet optio nemo quis officia quibusdam, veritatis aliquam, placeat harum totam dolorum.
+                           </textarea>
+                       </div>
+                   </div>
+                   <div class="property-status">Offers pending</div>
+                </section>
+                <footer>
+                    <div>
+                        <a href="#" class="small-button gray-button enable-editing" data-for="property">Edit Property</a>
+                    </div>
+                    <div>
+                        <a href="#" class="small-button gray-button disable-editing" data-for="property">Cancel</a>
+                        <a href="#" class="small-button disable-editing" data-for="property">Save Changes</a>
+                    </div>
+                </footer>
+            </article>
+        </div>
+        <section class="offers">
+            <article class="offer">
+                <div class="card">
+                   <header>
+                       <div class="offer-price">£160,000</div>
+                       <div class="offer-buyer">James Jones</div>
+                   </header>
+                   <div class="card-body">
+                       <ul class="offer-details">
+                        <li class="offer-position">Buying Position: <span class="green">Cash Buyer</span></li>
+                        <li class="offer-financial-position">Financial Position: <span class="green">Approved</span></li>
+                        <li class="offer-moving-day">Moving Day: <span class="green">Anytime</span></li>
+                    </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="column small-6 text-right">
+                            <a href="#" class="small-button red-button">Reject</a>
+                        </div>
+                        <div class="column small-6 text-left">
+                            <a href="#" class="small-button">Accept</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article class="offer">
+                <div class="card">
+                   <header>
+                       <div class="offer-price">£190,000</div>
+                       <div class="offer-buyer">Sara Jones</div>
+                   </header>
+                    <div class="card-body">
+                        <ul class="offer-details">
+                            <li class="offer-buying-position">Buying Position: <span class="bold">Seller</span></li>
+                            <li class="offer-financial-position">Financial Position: <span class="green">Approved</span></li>
+                            <li class="offer-moving-day">Moving Day: <span class="bold">15 September</span></li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="column small-6 text-right">
+                            <a href="#" class="small-button red-button">Reject</a>
+                        </div>
+                        <div class="column small-6 text-left">
+                            <a href="#" class="small-button">Accept</a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+        <section class="viewings">
+            <article class="viewing" id="8123">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="viewing-icon"><img src="img/icon-profile.png" alt=""></div>
+                        <div class="viewing-meta">
+                            <div class="viewing-details-time">
+                                <datetime><b>Thursday</b> 24/07/2016  12:45</datetime>
+                            </div>
+                            <div class="viewing-details-details">
+                                Jessica Stone, first time buyer looking for a property in the area
+                            </div>
+                        </div>
+                     </div>
+                     <div class="card-body viewing-comments">
+                        <textarea name="new-comment" class="viewing-comments-add"></textarea>
+                     </div>
+                    <footer>
+                    <div class="button-main-group">
+                        <a href="#" class="small-button gray-button">Cancel Viewing</a>
+                        <a href="#" class="small-button gray-button show-comment" data-for="8123">Add Comment</a>
+                    </div>
+                    <div class="button-comment-group">
+                        <a href="#" class="small-button gray-button hide-comment" data-for="8123">Cancel</a>
+                        <a href="#" class="small-button hide-comment" data-for="8123">Post</a>
+                    </div>
+                    </footer>
+                </div>
+            </article>
+            <article class="viewing" id="8111">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="viewing-icon"><img src="img/icon-profile.png" alt=""></div>
+                        <div class="viewing-meta">
+                            <div class="viewing-details-time">
+                                <datetime><b>Thursday</b> 24/07/2016  12:45</datetime>
+                            </div>
+                            <div class="viewing-details-details">
+                                James Jones, landlord looking for more flats in the area.
+                            </div>
+                        </div>
+                     </div>
+                     <div class="card-body viewing-comments">
+                        <div class="viewing-comment">
+                           <div class="comment-content">
+                               <p>Mr. Jones really liked the flat, but not soo keen on price.</p>
+                           </div>
+                            <div class="comment-meta">
+                                <span class="comment-meta-author">Lukasz Gladki</span>
+                                <span class="comment-meta-date">22/09/2016</span>
+                            </div>
+                        </div>
+                         <div class="viewing-comment">
+                           <div class="comment-content">
+                               <p>Shame, price isn't really negotiable.</p>
+                           </div>
+                            <div class="comment-meta">
+                                <span class="comment-meta-author">Sam Moore</span>
+                                <span class="comment-meta-date">22/09/2016</span>
+                            </div>
+                        </div>
+                        <textarea name="new-comment" class="viewing-comments-add"></textarea>
+                     </div>
+                    <footer>
+                    <div class="button-main-group">
+                        <a href="#" class="small-button gray-button">Cancel Viewing</a>
+                        <a href="#" class="small-button gray-button show-comment" data-for="8111">Add Comment</a>
+                    </div>
+                    <div class="button-comment-group">
+                        <a href="#" class="small-button gray-button hide-comment" data-for="8111">Cancel</a>
+                        <a href="#" class="small-button hide-comment" data-for="8111">Post</a>
+                    </div>
+                    </footer>
+                </div>
+            </article>
+            </section>
+</div>
+<footer class="app-footer">
+    copyright &copy; 2016 Myriago.com
+</footer>
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/what-input/what-input.js"></script>
+    <script src="bower_components/foundation-sites/dist/foundation.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>

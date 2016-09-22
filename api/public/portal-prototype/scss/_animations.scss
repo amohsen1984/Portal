@@ -1,0 +1,5 @@
+@keyframes flash {
+    from {background-color: white;}
+    20% {background-color: lighten($blue, 33%);}
+    to {background-color: white}
+}
