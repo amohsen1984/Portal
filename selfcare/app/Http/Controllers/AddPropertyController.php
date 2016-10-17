@@ -30,7 +30,7 @@ class AddPropertyController extends Controller
         ];
     $error = api_wrapper::api_call('propertie', null, 'POST', $property);
     if ($error == "[]"): $error = "Property Added Succesfully"; 
-    else: $error = "There was an error with your request";   
+    //else: $error = "There was an error with your request";   
     endif;
     return view('pages.add_property', ['error' => $error]);
     }
