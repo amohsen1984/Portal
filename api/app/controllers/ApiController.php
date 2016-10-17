@@ -60,7 +60,7 @@ class ApiController extends Controller {
             $primary_key = "i_" . strtolower($object);
 
             // the table name
-            $table = ucfirst($object) . "s";
+            $table = ucfirst($object) . $this->get_plural_characters($object);
 
             //run the query
             $data_object = DB::select("select * from $table where $primary_key = ? AND i_customer = ?", [$id, $this->credential['i_customer']]);
@@ -86,7 +86,7 @@ class ApiController extends Controller {
             }
 
             // the table name
-            $table = strtolower($object) . "s";
+            $table = strtolower($object) . $this->get_plural_characters($object);
 
             //read the raw data
             $request_body = file_get_contents('php://input');
@@ -135,7 +135,7 @@ class ApiController extends Controller {
             }
 
             // the table name
-            $table = strtolower($object) . "s";
+            $table = strtolower($object) .  $this->get_plural_characters($object);
 
             $pk = "i_" . strtolower($object);
 
@@ -188,7 +188,7 @@ class ApiController extends Controller {
         $primary_key = "i_" . strtolower($object);
 
         // the table name
-        $table = ucfirst($object) . "s";
+        $table = ucfirst($object) .  $this->get_plural_characters($object);
 
         //run the query
         $data_object = DB::delete("DELETE from $table where $primary_key = ? AND i_customer = ?", [$id, $this->credential['i_customer']]);
@@ -236,7 +236,7 @@ class ApiController extends Controller {
             $pagination = "Limit $limit Offset $offset";
 
             //table name
-            $table = ucfirst($object) . "s";
+            $table = ucfirst($object) . $this->get_plural_characters($object);
 
             $data_object = DB::select("select count(*) from $table where $condition $pagination", $values);
 
@@ -287,7 +287,7 @@ class ApiController extends Controller {
             $pagination = "Limit $limit Offset $offset";
 
             //table name
-            $table = strtolower($object) . "s";
+            $table = strtolower($object) . $this->get_plural_characters($object);
 
             //sql query
             $data_object = DB::select("select * from $table where $condition $pagination", $values);
@@ -352,6 +352,15 @@ class ApiController extends Controller {
     private function ValidateObject($object) {
 
         return true;
+    }
+
+    private function get_plural_characters($object) {
+
+        $string = 's';
+        if (preg_mach('/y$/i', $object))
+            $string = 'ies';
+        
+        return $string;
     }
 
 }
