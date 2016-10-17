@@ -120,7 +120,7 @@ ENGINE = InnoDB;
 -- Table `mydb`.`Properties`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`Properties` (
-  `i_property` BIGINT NOT NULL,
+  `i_property` BIGINT NOT NULL AUTO_INCREMENT,
   `code` VARCHAR(150) NULL,
   `description` TEXT NULL,
   `address` TEXT NULL,
