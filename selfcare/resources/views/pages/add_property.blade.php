@@ -109,7 +109,7 @@
         </section>
         <footer>
             <div class="button-main-group">
-                <button type="submit" class="small-button disable-editing" data-for="property">Add Property</button>
+                <button type="submit" class="small-button">Add Property</button>
             </div>
         </footer>
        </form>
