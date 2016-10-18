@@ -359,12 +359,12 @@ class ApiController extends Controller {
     private function get_table_name($object) {
 
         
-        if (preg_mach('/y$/i', $object))
+        if (preg_match('/y$/i', $object))
             $string = preg_replace('/y$/', 'ies', $object);
         else {
-            $string .= "s"; 
+            $string = $object.  "s";
         }
-        
+
         return ucfirst($string);
     }
 
