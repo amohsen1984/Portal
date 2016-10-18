@@ -28,11 +28,12 @@ class AddPropertyController extends Controller
             'i_seller' => '1',
             'price' => $request['price']
         ];
-    $error = api_wrapper::api_call('propertie', null, 'POST', $property);
+    $error = api_wrapper::api_call('property', null, 'POST', $property);
     if ($error == "[]"): $error = "Property Added Succesfully"; 
     //else: $error = "There was an error with your request";   
     endif;
-    return view('pages.add_property', ['error' => $error]);
+        var_dump($error);
+    return view('pages.add_property', ['error' => "error"]);
     }
     
 }
