@@ -33,38 +33,20 @@
             </div>
         </div>
         <div class="row column">
+           
+           @foreach($property_list as $property)
+           
             <article class="list-property">
                <section class="card-body">
-                   <div class="list-property-name"><a href="#">Apartment 9, 11 Morledge Street , Leicester, LE1 1TH</a></div>
+                   <div class="list-property-name"><a href="{{ $property['i_property'] }}">{{ $property['address'] }}, {{ $property['city'] }}, {{ $property['code'] }}</a></div>
                    <div class="list-property-seller"><span class="name">Margaret Newcastle</span> <span class="phone">t:0605399231</span> <span class="email">e:<a href="mailto:margatet@gmail.com">margatet@gmail.com</a></span></div>
                </section>
                 <footer class="row">
-                    <div class="list-status column small-6">Awaiting Agent</div>
-                    <div class="list-agents column small-6 text-right"><span class="agent">LG</span><span class="agent plus">+</span></div>
+                    <div class="list-status column small-6">{{ $property['status'] }}</div>
+                    <div class="list-agents column small-6 text-right"><span class="agent plus">+</span></div>
                 </footer>
             </article>
-    
-            <article class="list-property">
-               <section class="card-body">
-                   <div class="list-property-name"><a href="#">Apartment 9, 11 Morledge Street , Leicester, LE1 1TH</a></div>
-                   <div class="list-property-seller"><span class="name">Margaret Newcastle</span> <span class="phone">t:0605399231</span> <span class="email">e:<a href="mailto:margatet@gmail.com">margatet@gmail.com</a></span></div>
-               </section>
-                <footer class="row">
-                    <div class="list-status column small-6">Awaiting Agent</div>
-                    <div class="list-agents column small-6 text-right"><span class="agent">LG</span><span class="agent plus">+</span></div>
-                </footer>
-            </article>
-    
-            <article class="list-property">
-               <section class="card-body">
-                   <div class="list-property-name"><a href="#">Apartment 9, 11 Morledge Street , Leicester, LE1 1TH</a></div>
-                   <div class="list-property-seller"><span class="name">Margaret Newcastle</span> <span class="phone">t:0605399231</span> <span class="email">e:<a href="mailto:margatet@gmail.com">margatet@gmail.com</a></span></div>
-               </section>
-                <footer class="row">
-                    <div class="list-status column small-6">Awaiting Agent</div>
-                    <div class="list-agents column small-6 text-right"><span class="agent">LG</span><span class="agent plus">+</span></div>
-                </footer>
-            </article>
+            @endforeach
         </div>
     </section>
     

@@ -16,9 +16,9 @@ Route::resource('agents', 'AgentController');
 
 Route::get('new-property', 
   ['as' => 'property_form', 'uses' => 'AddPropertyController@create']);
+
 Route::post('new-property', 
   ['as' => 'property_store', 'uses' => 'AddPropertyController@store']);
 
-Route::get('properties-list', function(){
-    return view ('pages.properties_list');
-})->name('PropertiesList');
+Route::get('properties-list', 
+           ['as' => 'property_list', 'uses' => 'ListPropertyController@create']);

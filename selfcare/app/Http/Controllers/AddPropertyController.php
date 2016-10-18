@@ -19,17 +19,17 @@ class AddPropertyController extends Controller
     {
         
         if ($request['new'] == "yes"):
-            $request['new'] = true;
+            $request['new'] = 1;
         elseif ($request['new'] == "no"): 
-            $request['new'] = false;
+            $request['new'] = 0;
         else: 
             $request['new'] = null;
         endif;
             
         if ($request['chain'] == "yes"): 
-            $request['chain'] = true;
+            $request['chain'] = 1;
         elseif ($request['chain'] == "no"): 
-            $request['chain'] = false;
+            $request['chain'] = 0;
         else: 
             $request['chain'] = null;
         endif;   
