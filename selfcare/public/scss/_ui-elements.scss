@@ -1,0 +1,62 @@
+// DROPDOWN FILTER///
+.filter {
+    //main container
+    display: inline-block;
+    
+    .filter-label {
+        //description text
+        display: inline-block;
+    }
+    .filter-options {
+        // options container
+        display: inline-block;
+        position: relative;
+        overflow: visible;
+        cursor: pointer;
+    }
+    .filter-options-current {
+        //current selection
+        border-bottom: 1px solid transparent;
+        display: inline-block;
+        color: $blue;
+        &:hover {
+            border-bottom: 1px solid $blue;
+        }
+    }
+    .filter-options-list {
+        //dropdown list
+        @extend .no-bullets;
+        display: none;
+        position: absolute;
+        top: $line-height;
+        z-index: 999;
+        min-width: 12em;
+        background-color: $white;
+        padding: $line-height*0.25;
+        box-shadow: 2px 2px 2px fade-out($black, 0.75);
+        border-top: 1px solid $blue;
+        li {
+            padding: 0 $line-height*0.25;
+        }
+        li:hover {
+            background-color: $blue;
+            color: $white; 
+        }
+    }
+    
+}
+.filter-right {
+    @extend .filter;
+    text-align: right;
+    .filter-options-list {
+        right: 0px;
+    }
+}
+.filter-center {
+    @extend .filter;
+    text-align: center;
+    .filter-options-list {
+        right: 50%;
+        transform: translateX(50%);
+    }
+}
