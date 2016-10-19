@@ -22,3 +22,5 @@ Route::post('new-property',
 
 Route::get('properties-list', 
            ['as' => 'property_list', 'uses' => 'ListPropertyController@create']);
+Route::get('property/{id}', 
+           ['as' => 'property', 'uses' => 'PropertyController@create']);
