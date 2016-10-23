@@ -17,6 +17,23 @@ class AddPropertyController extends Controller
 
     public function store(Request $request)
     {
+        
+        if ($request['new'] == "yes"):
+            $request['new'] = 1;
+        elseif ($request['new'] == "no"): 
+            $request['new'] = 0;
+        else: 
+            $request['new'] = null;
+        endif;
+            
+        if ($request['chain'] == "yes"): 
+            $request['chain'] = 1;
+        elseif ($request['chain'] == "no"): 
+            $request['chain'] = 0;
+        else: 
+            $request['chain'] = null;
+        endif;   
+            
         $property = [
             'code' => $request['postcode'],
             'description' => $request['description'],
@@ -26,14 +43,20 @@ class AddPropertyController extends Controller
             'country' => $request['country'],
             'status' => 'AwaitingAgent',
             'i_seller' => '1',
-            'price' => $request['price']
+            'price' => $request['price'],
+            'type' => $request['type'],
+            'floors' => $request['floors'],
+            'bedrooms' => $request['bedrooms'],
+            'bathrooms' => $request['bathrooms'],
+            'reception_rooms' => $request['reception'],
+            'new_built' =>  $request['new_built'],
+            'chain' => $request['chain']
         ];
-    $error = api_wrapper::api_call('property', null, 'POST', $property);
-    if ($error == "[]"): $error = "Property Added Succesfully"; 
-    //else: $error = "There was an error with your request";   
+    $result = api_wrapper::api_call('property', null, 'POST', $property);
+    if ($result == "[]"): $result = "Property Added Succesfully"; 
+    else: $result = "There was an error with your request";   
     endif;
-        var_dump($error);
-    return view('pages.add_property', ['error' => "error"]);
+    return view('pages.add_property', ['error' => $result]);
     }
     
 }

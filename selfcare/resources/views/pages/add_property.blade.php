@@ -67,21 +67,21 @@
                    </div>
                    <div>
                        <label for="floors">Floors:</label>
-                       <input id="floors" type="number" value="1">
+                       <input id="floors" name="floors" type="number" value="1">
                    </div>
                    <div>
                        <label for="bedrooms">Bedrooms:</label>
-                       <input id="bedrooms" type="number" value="2">
+                       <input id="bedrooms" name="bedrooms" type="number" value="2">
                    </div>
                 </div>
                 <div class="columns medium-6">
                     <div>
                        <label for="bathrooms">Bathrooms:</label>
-                       <input id="bathrooms" type="number" value="2">
+                       <input id="bathrooms" name="bathrooms" type="number" value="2">
                    </div>
                    <div>
                         <label for="reception">Reception Rooms:</label>
-                        <input id="reception" type="number" value="1">
+                        <input id="reception" name="reception" type="number" value="1">
                    </div>
                    <div>
                         <label for="new">New Build:</label>
