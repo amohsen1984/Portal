@@ -50,6 +50,7 @@ class ApiController extends Controller {
     public function GetObject($object, $id) {
 
         try {
+
             //validate the object name
             if ($this->ValidateObject($object) === false) {
 
@@ -62,11 +63,20 @@ class ApiController extends Controller {
             // the table name
             $table = $this->get_table_name($object);
 
+            //check left joints
+            $sql = $this->get_sql($table, $primary_key);
+
+            //and 
+            $sql .= " where $table.$primary_key = ? AND $table.i_customer = ?";
+
             //run the query
-            $data_object = DB::select("select * from $table where $primary_key = ? AND i_customer = ?", [$id, $this->credential['i_customer']]);
+            $data_object = DB::select($sql, [$id, $this->credential['i_customer']]);
+
+
+            $output = $this->format_output($data_object, $primary_key);
 
             //return the data
-            return $data_object;
+            return $output;
         } catch (Exception $e) {
 
             //return an error
@@ -114,8 +124,8 @@ class ApiController extends Controller {
             //run the sql insert statement
             $data_object = DB::insert("insert into $table $fields_string values $parameters_string", $values);
 
-        
-            
+
+
             //return the data
             return array();
         } catch (Exception $e) {
@@ -138,7 +148,7 @@ class ApiController extends Controller {
 
             // the table name
             $table = $this->get_table_name($object);
-            
+
             $pk = "i_" . strtolower($object);
 
             //read the raw data
@@ -202,7 +212,13 @@ class ApiController extends Controller {
     public function GetListCount($object) {
         try {
 
-            //validate the object name
+            //the primary key field name
+            $primary_key = "i_" . strtolower($object);
+
+            //table name
+            $table = $this->get_table_name($object);
+
+//validate the object name
             if ($this->ValidateObject($object) === false) {
 
                 //the object is not supported, we need to rteurn 404
@@ -215,45 +231,45 @@ class ApiController extends Controller {
             $limit = DEFAULT_LIMIT;
             $and = '';
             foreach ($_GET as $key => $val) {
-
-                if ($key == 'offset') {
-                    $offset = $val;
-                } elseif ($key == 'limit') {
-                    $limit = $val;
-                } else {
-                    $condition .= $and . $this->GetCondition($key, $val);
-                    $and = ' AND ';
-                }
+                if (!preg_mach('/\./', $key))
+                    $key = "$table.$key";
+                $condition .= $and . $this->GetCondition($key, $val);
+                $and = ' AND ';
             }
 
-            //if number of records is > max, we nee to return an error
-            if ($limit > MAX_NO_RECORDS) {
-                
-            }
 
             //add i_customer condition
-            $condition .= $and . " i_customer = '" . $this->credential['i_customer'] . "'";
+            $condition .= $and . " $table.i_customer = '" . $this->credential['i_customer'] . "'";
 
-            // build pagination part
-            $pagination = "Limit $limit Offset $offset";
+            //get sql
+            $sql = $this->get_sql($table, $primary_key);
 
-            //table name
-            $table = $this->get_table_name($object);
+            //add condition
+            $sql .= " where $condition ";
 
-            $data_object = DB::select("select count(*) from $table where $condition $pagination", $values);
+            //run the query
+            $output = DB::select($sql, $values);
 
-            return $data_object;
+            //return the data
+            return $output;
         } catch (Exception $e) {
 
             //return an error
             header('HTTP/1.0 500 Forbidden');
-            return array('Error' => $e->getMessage());
+            return array('Error2' => $e->getMessage());
         }
     }
 
     public function GetList($object) {
         try {
-            //validate the object name
+
+            //the primary key field name
+            $primary_key = "i_" . strtolower($object);
+
+            //table name
+            $table = $this->get_table_name($object);
+
+//validate the object name
             if ($this->ValidateObject($object) === false) {
 
                 //the object is not supported, we need to rteurn 404
@@ -272,6 +288,8 @@ class ApiController extends Controller {
                 } elseif ($key == 'limit') {
                     $limit = $val;
                 } else {
+                    if (!preg_mach('/\./', $key))
+                        $key = "$table.$key";
                     $condition .= $and . $this->GetCondition($key, $val);
                     $and = ' AND ';
                 }
@@ -283,19 +301,24 @@ class ApiController extends Controller {
             }
 
             //add i_customer condition
-            $condition .= $and . " i_customer = '" . $this->credential['i_customer'] . "'";
+            $condition .= $and . " $table.i_customer = '" . $this->credential['i_customer'] . "'";
 
             // build pagination part
             $pagination = "Limit $limit Offset $offset";
 
-            //table name
-            $table = $this->get_table_name($object);
+            $sql = $this->get_sql($table, $primary_key);
 
-            //sql query
-            $data_object = DB::select("select * from $table where $condition $pagination", $values);
+            //add condition
+            $sql .= " where $condition $pagination";
 
-            //return data
-            return $data_object;
+            //run the query
+            $data_object = DB::select($sql, $values);
+
+            //format data
+            $output = $this->format_output($data_object, $primary_key);
+
+            //return the data
+            return $output;
         } catch (Exception $e) {
 
             //return an error
@@ -358,14 +381,95 @@ class ApiController extends Controller {
 
     private function get_table_name($object) {
 
-        
+
         if (preg_match('/y$/i', $object))
             $string = preg_replace('/y$/', 'ies', $object);
         else {
-            $string = $object.  "s";
+            $string = $object . "s";
         }
 
         return ucfirst($string);
+    }
+
+    private function get_sql($table, $primary_key, $mode = 'list') {
+
+        $joints = array(
+            'Properties' => array(
+                'direct' => array(
+                    array('table' => 'Sellers', 'pk' => 'i_seller'),
+                ),
+                'indirect' => array(
+                    array('table' => 'Users', 'pk' => 'i_user', 'joint_table' => 'AgentProperties')
+                )
+            ),
+        );
+
+
+        $main_sql = "Select $table.* ";
+        $joints_part = "";
+
+        //left joints
+        if (isset($joints[$table]) && count($joints[$table]['direct'])) {
+
+            foreach ($joints[$table]['direct'] as $joint) {
+
+                $sec_table = $joint['table'];
+                $pk = $joint['pk'];
+                $main_sql .= ", '#$sec_table#', $sec_table.*";
+                $joints_part .= " LEFT JOIN $sec_table ON $table.$pk=$sec_table.$pk ";
+            }
+        }
+
+        //left joints
+        if (isset($joints[$table]) && count($joints[$table]['indirect'])) {
+
+            foreach ($joints[$table]['indirect'] as $joint) {
+
+                $sec_table = $joint['table'];
+                $joint_table = $joint['joint_table'];
+                $pk = $joint['pk'];
+
+                $main_sql .= ", '#$sec_table#', $sec_table.*";
+
+                $joints_part .= " LEFT JOIN $joint_table ON $table.$primary_key = $joint_table.$primary_key ";
+                $joints_part .= " LEFT JOIN $sec_table ON  $joint_table.$pk= $sec_table.$pk ";
+            }
+        }
+
+        if ($mode == 'count')
+            $main_sql = "Select count(*)";
+
+        return $main_sql . " FROM $table " . $joints_part;
+    }
+
+    private function format_output($data_object, $primary_key) {
+
+        foreach ($data_object as $item) {
+            $main = true;
+            $item = (array) $item;
+            $index = $item[$primary_key];
+            $composite_key = '';
+            $composite_index = 0;
+
+            if (!isset($output[$index]))
+                $output[$index] = array();
+
+            foreach ($item as $field => $value) {
+
+                if (preg_match('/#/', $field)) {
+                    $composite_key = preg_replace('/#/', '', $field);
+                    $composite_index = isset($output[$index][$composite_key]) ? count($output[$index][$composite_key]) : 0;
+                    $main = false;
+                    continue;
+                }
+
+                if ($main)
+                    $output[$index][$field] = $value;
+                elseif (isset($value))
+                    $output[$index][$composite_key][$composite_index][$field] = $value;
+            }
+        }
+        return $output;
     }
 
 }
