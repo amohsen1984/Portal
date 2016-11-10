@@ -20,7 +20,8 @@ Route::get('new-property',
 Route::post('new-property', 
   ['as' => 'property_store', 'uses' => 'AddPropertyController@store']);
 
-Route::get('properties-list', 
+Route::get('properties-list/{search?}', 
            ['as' => 'property_list', 'uses' => 'ListPropertyController@create']);
+
 Route::get('property/{id}', 
            ['as' => 'property', 'uses' => 'PropertyController@create']);

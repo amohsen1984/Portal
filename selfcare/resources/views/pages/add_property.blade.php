@@ -18,6 +18,39 @@
            <div class="card-header"><h1>Register New Property</h1></div>
            <section class="card-body">
            <div class="row column">
+               <h3>Your Details</h3>
+           </div>
+            <div class="row">
+               <div class="columns medium-6">
+                   <div>
+                       <label for="seller_name">Your Name:</label>
+                       <input type="text" name="seller_name" id="seller_name">
+                   </div>
+                   <div>
+                       <label for="seller_email">Email Address:</label>
+                       <input type="text" name="seller_email" id="seller_email">
+                   </div>
+                   <div>
+                       <label for="seller_tel">Telephone Number:</label>
+                       <input type="text" name="seller_tel" id="seller_tel">
+                   </div>
+               </div>
+               <div class="columns medium-6">
+                   <div>
+                       <label for="seller_name">Your Address:</label>
+                       <input type="text" name="seller_name" id="seller_name">
+                   </div>
+                   <div>
+                       <label for="seller_post_code">Your Postcode:</label>
+                       <input type="text" name="seller_post_code" id="seller_post_code">
+                   </div>
+                   <div>
+                       <label for="seller_city">Your City:</label>
+                       <input type="text" name="seller_city" id="seller_city">
+                   </div>
+               </div>
+            </div>
+           <div class="row column">
                <h3>Property Address</h3>
            </div>
            <div class="row">

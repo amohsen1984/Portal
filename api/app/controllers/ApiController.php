@@ -122,12 +122,11 @@ class ApiController extends Controller {
             $fields_string = '(' . implode(',', $fields) . ')';
 
             //run the sql insert statement
-            $data_object = DB::insert("insert into $table $fields_string values $parameters_string", $values);
-
+            $id = DB::insert("insert into $table $fields_string values $parameters_string", $values);
 
 
             //return the data
-            return array();
+            return $id;
         } catch (Exception $e) {
 
             //return an error
@@ -231,7 +230,7 @@ class ApiController extends Controller {
             $limit = DEFAULT_LIMIT;
             $and = '';
             foreach ($_GET as $key => $val) {
-                if (!preg_mach('/\./', $key))
+                if (!preg_match('/\./', $key))
                     $key = "$table.$key";
                 $condition .= $and . $this->GetCondition($key, $val);
                 $and = ' AND ';
@@ -262,7 +261,6 @@ class ApiController extends Controller {
 
     public function GetList($object) {
         try {
-
             //the primary key field name
             $primary_key = "i_" . strtolower($object);
 
@@ -288,13 +286,14 @@ class ApiController extends Controller {
                 } elseif ($key == 'limit') {
                     $limit = $val;
                 } else {
-                    if (!preg_mach('/\./', $key))
+                    if (!preg_match('/\./', $key))
                         $key = "$table.$key";
+    
                     $condition .= $and . $this->GetCondition($key, $val);
                     $and = ' AND ';
                 }
             }
-
+ 
             //if number of records is > max, we nee to return an error
             if ($limit > MAX_NO_RECORDS) {
                 
@@ -310,7 +309,7 @@ class ApiController extends Controller {
 
             //add condition
             $sql .= " where $condition $pagination";
-
+            
             //run the query
             $data_object = DB::select($sql, $values);
 

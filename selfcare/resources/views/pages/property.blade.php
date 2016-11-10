@@ -13,7 +13,7 @@
    <div class="row column">
             <article class="property">
                <div class="card-header">
-                   <div class="property-name">{{ $property['address'] }}, {{ $property['city'] }}, {{ $property['code'] }}</div>
+                   <div class="property-name">{{ $property['property_address'] }}, {{ $property['property_city'] }}, {{ $property['property_code'] }}</div>
                </div>
                 <section class="card-body">
                    <div class="property-meta">
@@ -21,55 +21,55 @@
                        <div>
                            <label for="type">Type: </label> 
                            <select name="type" id="type"  disabled="disabled">
-                               <option {{ ($property['type'] == "Apartment" ? 'selected="selected"':'') }}>Apartment</option>
-                               <option {{ ($property['type'] == "Terrace" ? 'selected="selected"':'') }}>Terrace</option>
-                               <option {{ ($property['type'] == "Semi-detached" ?  'selected="selected"':'') }}>Semi-detached</option>
-                               <option {{ ($property['type'] == "Detached" ? 'selected="selected"':'') }}>Detached</option>
+                               <option {{ ($property['property_type'] == "Apartment" ? 'selected="selected"':'') }}>Apartment</option>
+                               <option {{ ($property['property_type'] == "Terrace" ? 'selected="selected"':'') }}>Terrace</option>
+                               <option {{ ($property['property_type'] == "Semi-detached" ?  'selected="selected"':'') }}>Semi-detached</option>
+                               <option {{ ($property['property_type'] == "Detached" ? 'selected="selected"':'') }}>Detached</option>
                            </select>
                        </div>
                        <div>
                            <label for="price">Asking Price:</label>
-                            <input type="text" value="{{ $property['price'] }}" disabled="disabled">
+                            <input name="price" type="text" value="{{ $property['property_price'] }}" disabled="disabled">
                        </div>
                        <div>
                            <label for="floors">Floors:</label>
-                           <input id="floors" type="number" value="{{ $property['floors'] }}" disabled="disabled">
+                           <input id="floors" name="floors" type="number" value="{{ $property['property_floors'] }}" disabled="disabled">
                        </div>
                        <div>
                            <label for="bedrooms">Bedrooms:</label>
-                           <input id="bedrooms" type="number" value="{{ $property['bedrooms'] }}" disabled="disabled">
+                           <input id="bedrooms" name="bedrooms" type="number" value="{{ $property['property_bedrooms'] }}" disabled="disabled">
                        </div>
                        <div>
                            <label for="bathrooms">Bathrooms:</label>
-                           <input id="bathrooms" type="number" value="{{ $property['bathrooms'] }}"  disabled="disabled">
+                           <input id="bathrooms" name="bathrooms" type="number" value="{{ $property['property_bathrooms'] }}"  disabled="disabled">
                        </div>
                        <div>
                             <label for="reception">Reception Rooms:</label>
-                            <input id="reception" type="number" value="{{ $property['reception_rooms'] }}"  disabled="disabled">
+                            <input id="reception" name="receptions" type="number" value="{{ $property['property_reception_rooms'] }}"  disabled="disabled">
                        </div>
                        <div>
                             <label for="new">New Build:</label>
                             <select name="new" id="new" disabled="disabled">
-                               <option {{ ($property['new_built'] == "Yes" ? 'selected="selected"':'') }}>Yes</option>
-                               <option {{ $property['new_built'] == "No" ? 'selected="selected"':''}}>No</option>
+                               <option {{ ($property['property_new_built'] == "Yes" ? 'selected="selected"':'') }}>Yes</option>
+                               <option {{ $property['property_new_built'] == "No" ? 'selected="selected"':''}}>No</option>
                            </select>
                        </div>
                        <div>
                             <label for="chain">Part of Chain:</label>
                             <select name="chain" id="chain" disabled="disabled">
-                               <option  {{ ($property['chain'] == "Yes" ? 'selected="selected"':'') }}>Yes</option>
-                               <option {{ ($property['chain'] == "No" ? 'selected="selected"':'') }}>No</option>
+                               <option  {{ ($property['property_chain'] == "Yes" ? 'selected="selected"':'') }}>Yes</option>
+                               <option {{ ($property['property_chain'] == "No" ? 'selected="selected"':'') }}>No</option>
                            </select>
                        </div>
                    </div>
                    <div class="property-description">
                        <b>Description:</b>
                        <div class="property-description-editor">
-                           <textarea name="description" id="" cols="30" rows="10" disabled="disabled">{{ $property['description'] }}
+                           <textarea name="description" id="" cols="30" rows="10" disabled="disabled">{{ $property['property_description'] }}
                            </textarea>
                        </div>
                    </div>
-                   <div class="property-status">Offers pending</div>
+                   <div class="property-status">{{$property['property_status']}}</div>
                 </section>
                 <footer>
                     <div>

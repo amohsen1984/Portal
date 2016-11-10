@@ -30,10 +30,10 @@ class api_wrapper extends Model
             $fields_string .= $key.'='.$value.'&';
         }
         
-        rtrim($fields_string, '&');
+        $fields_string = rtrim($fields_string, "&");
         if(!empty($fields_string))
             $url .= "?$fields_string";
-        
+
         curl_setopt($ch,CURLOPT_URL, $url);
     
     }
@@ -69,8 +69,10 @@ class api_wrapper extends Model
                     
     //close connection
     curl_close($ch);
-        
+
         return $result;
 
 }
+    
+    
 }

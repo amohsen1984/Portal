@@ -35,26 +35,36 @@ class AddPropertyController extends Controller
         endif;   
             
         $property = [
-            'code' => $request['postcode'],
-            'description' => $request['description'],
-            'address' => $request['address'],
-            'city' => $request['city'],
-            'state' => $request['state'],
-            'country' => $request['country'],
-            'status' => 'AwaitingAgent',
+            'property_code' => $request['postcode'],
+            'property_description' => $request['description'],
+            'property_address' => $request['address'],
+            'property_city' => $request['city'],
+            'property_state' => $request['state'],
+            'property_country' => $request['country'],
+            'property_status' => 'AwaitingAgent',
             'i_seller' => '1',
-            'price' => $request['price'],
-            'type' => $request['type'],
-            'floors' => $request['floors'],
-            'bedrooms' => $request['bedrooms'],
-            'bathrooms' => $request['bathrooms'],
-            'reception_rooms' => $request['reception'],
-            'new_built' =>  $request['new_built'],
-            'chain' => $request['chain']
+            'property_price' => $request['price'],
+            'property_type' => $request['type'],
+            'property_floors' => $request['floors'],
+            'property_bedrooms' => $request['bedrooms'],
+            'property_bathrooms' => $request['bathrooms'],
+            'property_reception_rooms' => $request['reception'],
+            'property_new_built' =>  $request['new_built'],
+            'property_chain' => $request['chain']
+        ];
+        $seller = [
+            'seller_name' => $request['seller_name'],
+            'seller_email' => $request['seller_email'],
+            'seller_phone' => $request['seller_phone'],
+            'seller_address' => $request['seller_address'],
+            'seller_post_code' => $request['seller_post_code'],
+            'seller_city' => $request['seller_city']
         ];
     $result = api_wrapper::api_call('property', null, 'POST', $property);
-    if ($result == "[]"): $result = "Property Added Succesfully"; 
-    else: $result = "There was an error with your request";   
+    $result_2 = api_wrapper::api_call('seller', null, 'POST', $seller);
+        
+    if ($result == "[]" AND $result_2 == "[]"): $result = "Property Added Succesfully"; 
+    else:  //$result = "There has been a problem with your query";   
     endif;
     return view('pages.add_property', ['error' => $result]);
     }

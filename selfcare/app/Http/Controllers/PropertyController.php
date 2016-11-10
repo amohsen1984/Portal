@@ -11,7 +11,8 @@ class PropertyController extends Controller
     {
         $property = api_wrapper::api_call('property', $id, 'GET', array());
         $property = json_decode($property, true);
-        return view('pages.property', array('property' => $property[0]));
+        return view('pages.property', array('property' => $property[$id]));
+        
     }
 }
 
