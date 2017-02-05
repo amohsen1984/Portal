@@ -1,6 +1,6 @@
 <?php
 
-define('DEFAULT_LIMIT', 100);
+define('DEFAULT_LIMIT', 300);
 define('MAX_NO_RECORDS', 300);
 
 class ApiController extends Controller {
@@ -94,6 +94,7 @@ class ApiController extends Controller {
 
                 //the object is not supported, we need to rteurn 403
             }
+
 
             // the table name
             $table = $this->get_table_name($object);
@@ -310,11 +311,15 @@ class ApiController extends Controller {
             //add condition
             $sql .= " where $condition $pagination";
             
+
+
             //run the query
             $data_object = DB::select($sql, $values);
 
             //format data
-            $output = $this->format_output($data_object, $primary_key);
+            $output = array();
+            if(count($data_object))
+                $output = $this->format_output($data_object, $primary_key);
 
             //return the data
             return $output;
